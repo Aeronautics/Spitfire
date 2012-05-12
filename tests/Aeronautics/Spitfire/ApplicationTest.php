@@ -16,7 +16,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         unset($this->app);
     }
 
-    public function testContainer()
+    public function testRootDispatch()
     {
         $response = $this->app->dispatch('GET', '/');
         $this->assertEquals('Crimsom Rider...', (string) $response);

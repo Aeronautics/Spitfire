@@ -29,3 +29,30 @@ API
 /sp/sao-paulo/legislativo/sessoes-plenarias/2012/04/12
 
 /sp/sao-paulo/legislativo/partidos/PT
+
+
+
+* União
+    * Executivo
+    * Legislativo
+        * Parlamentares
+            * Câmara dos Deputados
+            * Senado Federal
+            * União dos dois acima (Congresso Nacional)
+    * Judiciário
+        * STJ (paira sobre estrutura do judiciario)
+        * STF (paira sobre estrutura do judiciario)
+        * TSE (registro nacional de partido)
+* Estado
+    * Executivo
+    * Legislativo
+        * Parlamentares
+            * Deputados Estaduais
+            * Assembléia Legislativa
+    * Judiciário
+        * Tribunais de Justiça
+        * TRE - Tribunais Regionais Eleitorais
+* Munícipio
+    * Executivo
+    * Legislativo
+        * Parlamentares
