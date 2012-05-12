@@ -23,6 +23,11 @@ a list of the comand lines required to install everything.
     sudo pear install Respect/Relational-0.4.4
     sudo pear install Respect/Validation-0.4.4
 
+The database isntructions can be found in a [GIST](https://gist.github.com/2667935)
+while in development. Please, **be aware** that everything in this database (while not 
+in this repository) can be changed!
+
+
 API
 ---
 
