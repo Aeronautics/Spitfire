@@ -1,2 +1,3 @@
 .foundation
-reports
+/reports/
+/nbproject/
