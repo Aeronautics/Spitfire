@@ -61,7 +61,7 @@ function ask($question, $trim = true)
 
 function x2s(SimpleXMLElement $element)
 {
-    return (string) $element;
+    return empty($element) ? null : (string) $element;
 }
 
 function x2a(SimpleXMLElement $element)
