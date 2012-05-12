@@ -10,11 +10,17 @@ require_once __DIR__ . '/common-inc.php';
  */
 function vereadores_sp()
 {
-    $url = 'http://www1.camara.sp.gov.br/vereadores_joomla.asp';
+    $base   = 'http://www1.camara.sp.gov.br';
+    $url    = $base . '/vereadores_joomla.asp';
+    debug('Fetching from url "%s"', $url);
     $content = file_get_contents($url);
+
     if (empty($content)) {
         throw new Exception('Sem resultado em ' . $url);
     }
+
+    debug('Parsing fetched data');
+
     $lines      = explode(PHP_EOL, $content);
     $content    = $lines[11];
     $content    = preg_replace('/>/', ">\n", $content);
@@ -36,6 +42,34 @@ function vereadores_sp()
         },
         $content
     );
+
+    foreach (array_keys($vereadores) as $id) {
+        $vereador =& $vereadores[$id];
+        $url = $base. '/vereador_joomla2.asp?vereador=' . $id;
+        debug('Fetching data of "%s"', $url);
+        /* @var $data tidy */
+        $data   = file_get_contents($url);
+        $data   = tidy_repair_string($data, array('output-xml' =>true));
+        $data   = str_replace('&nbsp;', '', $data);
+        /* @var $data SimpleXMLElement */
+        $xml    = simplexml_load_string($data);
+        $img    = $base . '/'
+                . $xml  ->body
+                        ->div[0]
+                        ->table[0]
+                        ->tr[0]
+                        ->td[0]
+                        ->table[0]
+                        ->tr[0]
+                        ->td[0]
+                        ->img['src'];
+        if (getenv('DEBUG') > 1) {
+            $vereador['img'] = $img;
+        } else {
+            $vereador['img'] = file_get_contents($img);
+        }
+        unset($vereador);
+    }
     return $vereadores;
 };
 

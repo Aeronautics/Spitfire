@@ -69,3 +69,13 @@ function x2a(SimpleXMLElement $element)
     $json = json_encode($element);
     return json_decode($json, TRUE);
 }
+
+
+function debug($message)
+{
+    if (getenv('DEBUG')) {
+        $args = func_get_args();
+        $message = array_shift($args);
+        writeln(vsprintf($message, $args));
+    }
+}
