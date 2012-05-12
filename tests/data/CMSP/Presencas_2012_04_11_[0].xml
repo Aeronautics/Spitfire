@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CMSP>
+  <Presencas Data="11/4/2012" TotalPresentes="55" TotalPresencasOrdinaria="55" TotalPresencasExtraordinarias="110">
+    <Vereador NomeParlamentar="Abou Anni" IDParlamentar="51" Partido="PV" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:04:37" />
+    <Vereador NomeParlamentar="Adilson Amadeu" IDParlamentar="34" Partido="PTB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:06:56" />
+    <Vereador NomeParlamentar="Adolfo Quintas" IDParlamentar="40" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 18:08:13" />
+    <Vereador NomeParlamentar="Agnaldo Timóteo" IDParlamentar="21" Partido="PR" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:13:00" />
+    <Vereador NomeParlamentar="Alfredinho" IDParlamentar="119" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:03:25" />
+    <Vereador NomeParlamentar="Aníbal de Freitas" IDParlamentar="133" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:05:30" />
+    <Vereador NomeParlamentar="Antonio Carlos Rodrigues" IDParlamentar="5" Partido="PR" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:20:09" />
+    <Vereador NomeParlamentar="Arselino Tatto" IDParlamentar="1" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:44:37" />
+    <Vereador NomeParlamentar="Atílio Francisco" IDParlamentar="45" Partido="PRB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:05:55" />
+    <Vereador NomeParlamentar="Aurelio Miguel" IDParlamentar="20" Partido="PR" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:09:35" />
+    <Vereador NomeParlamentar="Aurélio Nomura" IDParlamentar="50" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:33:58" />
+    <Vereador NomeParlamentar="Carlos Apolinario" IDParlamentar="8" Partido="DEM" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 16:13:03" />
+    <Vereador NomeParlamentar="Carlos Neder" IDParlamentar="44" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:38:17" />
+    <Vereador NomeParlamentar="Celso Jatene" IDParlamentar="35" Partido="PTB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:43:01" />
+    <Vereador NomeParlamentar="Chico Macena" IDParlamentar="29" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:22:45" />
+    <Vereador NomeParlamentar="Claudinho de Souza" IDParlamentar="41" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:02:28" />
+    <Vereador NomeParlamentar="Claudio Fonseca" IDParlamentar="121" Partido="PPS" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:13:02" />
+    <Vereador NomeParlamentar="Claudio Prado" IDParlamentar="53" Partido="PDT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:12:45" />
+    <Vereador NomeParlamentar="Dalton Silvano" IDParlamentar="12" Partido="PV" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:02:48" />
+    <Vereador NomeParlamentar="David Soares" IDParlamentar="132" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:11:01" />
+    <Vereador NomeParlamentar="Domingos Dissei" IDParlamentar="22" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:34:06" />
+    <Vereador NomeParlamentar="Donato" IDParlamentar="16" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:35:14" />
+    <Vereador NomeParlamentar="Edir Sales" IDParlamentar="131" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:21:42" />
+    <Vereador NomeParlamentar="Eliseu Gabriel" IDParlamentar="38" Partido="PSB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:17:24" />
+    <Vereador NomeParlamentar="Floriano Pesaro" IDParlamentar="118" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:52:30" />
+    <Vereador NomeParlamentar="Francisco Chagas" IDParlamentar="3" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:08:44" />
+    <Vereador NomeParlamentar="Gilson Barreto" IDParlamentar="13" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:03:17" />
+    <Vereador NomeParlamentar="Goulart" IDParlamentar="6" Partido="PSD" Presente="Licença&lt;sup&gt;4&lt;/sup&gt;" IDEvento="Licencas.xml" AcaoEvento="LICENCA" HoraEvento="" />
+    <Vereador NomeParlamentar="Ítalo Cardoso" IDParlamentar="117" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:24:23" />
+    <Vereador NomeParlamentar="Jamil Murad" IDParlamentar="114" Partido="PCdoB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:09:05" />
+    <Vereador NomeParlamentar="José Américo" IDParlamentar="15" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:44:33" />
+    <Vereador NomeParlamentar="José Ferreira (Zelão)" IDParlamentar="4" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:52:40" />
+    <Vereador NomeParlamentar="José Police Neto" IDParlamentar="11" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:00:53" />
+    <Vereador NomeParlamentar="José Rolim" IDParlamentar="26" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:13:03" />
+    <Vereador NomeParlamentar="Juliana Cardoso" IDParlamentar="113" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:17:51" />
+    <Vereador NomeParlamentar="Juscelino Gadelha" IDParlamentar="25" Partido="PSB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:48:12" />
+    <Vereador NomeParlamentar="Marco Aurélio Cunha" IDParlamentar="112" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:09:01" />
+    <Vereador NomeParlamentar="Marta Costa" IDParlamentar="10" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:36:59" />
+    <Vereador NomeParlamentar="Milton Ferreira" IDParlamentar="122" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:26:31" />
+    <Vereador NomeParlamentar="Milton Leite" IDParlamentar="9" Partido="DEM" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:03:07" />
+    <Vereador NomeParlamentar="Natalini" IDParlamentar="27" Partido="PV" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:04:27" />
+    <Vereador NomeParlamentar="Netinho de Paula" IDParlamentar="116" Partido="PCdoB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:23:13" />
+    <Vereador NomeParlamentar="Noemi Nonato" IDParlamentar="37" Partido="PSB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:19:23" />
+    <Vereador NomeParlamentar="Paulo Frange" IDParlamentar="32" Partido="PTB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:48:31" />
+    <Vereador NomeParlamentar="Quito Formiga" IDParlamentar="128" Partido="PR" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:06:35" />
+    <Vereador NomeParlamentar="Ricardo Teixeira" IDParlamentar="39" Partido="PV" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:04:18" />
+    <Vereador NomeParlamentar="Roberto Tripoli" IDParlamentar="49" Partido="PV" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:06:39" />
+    <Vereador NomeParlamentar="Russomano" IDParlamentar="46" Partido="PP" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:56:40" />
+    <Vereador NomeParlamentar="Sandra Tadeu" IDParlamentar="115" Partido="DEM" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:21:38" />
+    <Vereador NomeParlamentar="Senival Moura" IDParlamentar="43" Partido="PT" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:46:29" />
+    <Vereador NomeParlamentar="Souza Santos" IDParlamentar="127" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:44:28" />
+    <Vereador NomeParlamentar="Tião Farias" IDParlamentar="42" Partido="PSDB" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:56:27" />
+    <Vereador NomeParlamentar="Toninho Paiva" IDParlamentar="19" Partido="PR" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 14:58:55" />
+    <Vereador NomeParlamentar="Ushitaro Kamia" IDParlamentar="23" Partido="PSD" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:36:31" />
+    <Vereador NomeParlamentar="Wadih Mutran" IDParlamentar="48" Partido="PP" Presente="Presente" IDEvento="6" AcaoEvento="PRESENÇA" HoraEvento="11/04/2012 15:26:15" />
+  </Presencas>
+</CMSP>
