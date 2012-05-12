@@ -44,14 +44,12 @@ function vereadores_sp()
     );
 
     foreach (array_keys($vereadores) as $id) {
-        if ($id !== 102) {
-            continue;
-        }
         $vereador =& $vereadores[$id];
         $url = $base. '/vereador_joomla2.asp?vereador=' . $id;
         debug('Fetching data of "%s"', $url);
         /* @var $data tidy */
         $data   = file_get_contents($url);
+        debug('Parsing data');
         $data   = tidy_repair_string($data, array('output-xml' =>true));
         $data   = str_replace('&nbsp;', '', $data);
         /* @var $data SimpleXMLElement */
