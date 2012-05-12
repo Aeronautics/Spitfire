@@ -59,3 +59,13 @@ function ask($question, $trim = true)
     return $reply;
 }
 
+function x2s(SimpleXMLElement $element)
+{
+    return (string) $element;
+}
+
+function x2a(SimpleXMLElement $element)
+{
+    $json = json_encode($element);
+    return json_decode($json, TRUE);
+}
