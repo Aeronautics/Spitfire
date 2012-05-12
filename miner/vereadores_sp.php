@@ -10,6 +10,11 @@ require_once __DIR__ . '/common-inc.php';
  */
 function vereadores_sp()
 {
+    $config = new Respect\Config\Container('conf/manifest.ini');
+
+    /* @var $mapper Respect\Relational\Mapper */
+    $mapper =  $config->container->relational;
+
     $base   = 'http://www1.camara.sp.gov.br';
     $url    = $base . '/vereadores_joomla.asp';
     debug('Fetching from url "%s"', $url);

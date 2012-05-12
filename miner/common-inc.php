@@ -1,5 +1,8 @@
 <?php
 
+/* Bootstrap */
+require_once __DIR__ . '/../bootstrap.php';
+
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     fwrite(STDERR, 'This file can not be called directly.' . PHP_EOL);
     exit(1);
