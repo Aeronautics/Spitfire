@@ -44,6 +44,9 @@ function vereadores_sp()
     );
 
     foreach (array_keys($vereadores) as $id) {
+        if ($id !== 102) {
+            continue;
+        }
         $vereador =& $vereadores[$id];
         $url = $base. '/vereador_joomla2.asp?vereador=' . $id;
         debug('Fetching data of "%s"', $url);
@@ -63,11 +66,30 @@ function vereadores_sp()
                         ->tr[0]
                         ->td[0]
                         ->img['src'];
+        $biografia  = $xml->body
+                        ->div[0]
+                        ->table[0]
+                        ->tr[1]
+                        ->td;
+        $biografia  = $biografia->asXml();
+        $biografia  = str_replace(
+            '<p class="biografia_vereador_titulo">Biografia</p>',
+            '',
+            $biografia
+        );
+        $biografia  = str_replace(PHP_EOL, ' ', $biografia);
+        $biografia  = str_replace('<', PHP_EOL . '<', $biografia);
+        $biografia  = strip_tags($biografia);
+        $biografia  = preg_replace('/\n+/', PHP_EOL, $biografia);
+        $biografia  = preg_replace('/\n\s/', PHP_EOL, $biografia);
+        $biografia  = preg_replace('/\n+/', PHP_EOL, $biografia);
+
         if (getenv('DEBUG') > 1) {
             $vereador['img'] = $img;
         } else {
             $vereador['img'] = file_get_contents($img);
         }
+        $vereador['biografia'] = $biografia;
         unset($vereador);
     }
     return $vereadores;
