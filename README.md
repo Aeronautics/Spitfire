@@ -20,6 +20,7 @@ a list of the comand lines required to install everything.
     sudo pear install Respect/Loader-0.2.0
     sudo pear install Respect/Rest-0.4.1
     sudo pear install Respect/Config-0.4.1
+    sudo pear install Respect/Data-0.1.5
     sudo pear install Respect/Relational-0.4.4
     sudo pear install Respect/Validation-0.4.4
 
