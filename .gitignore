@@ -1,3 +1,4 @@
-.foundation
+*.bak
+/.foundation/
 /reports/
 /nbproject/

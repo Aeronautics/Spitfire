@@ -1,5 +1,8 @@
 <?php
 
+/* Bootstrap */
+require_once __DIR__ . '/../bootstrap.php';
+
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     fwrite(STDERR, 'This file can not be called directly.' . PHP_EOL);
     exit(1);
@@ -68,4 +71,14 @@ function x2a(SimpleXMLElement $element)
 {
     $json = json_encode($element);
     return json_decode($json, TRUE);
+}
+
+
+function debug($message)
+{
+    if (getenv('DEBUG')) {
+        $args = func_get_args();
+        $message = array_shift($args);
+        writeln(vsprintf($message, $args));
+    }
 }
