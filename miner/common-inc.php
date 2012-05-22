@@ -3,6 +3,17 @@
 /* Bootstrap */
 require_once __DIR__ . '/../bootstrap.php';
 
+$config = new Respect\Config\Container('conf/application.ini');
+
+/**
+ * @return Respect\Config\Container
+ */
+function config() {
+    global $config;
+
+    return $config;
+}
+
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     fwrite(STDERR, 'This file can not be called directly.' . PHP_EOL);
     exit(1);

@@ -24,23 +24,39 @@ function vereadores()
     }
 
     $array   = array();
+    $criacao = date('Y-m-d H:i:s');
     foreach ($xml->Row as $item) {
-        $object = new StdClass;
-        $object->nome = x2s($item->VEREADOR);
-        $object->gv = x2s($item->GV);
-        $object->ramal = x2s($item->RAMAL);
-        $object->fax = x2s($item->FAX);
-        $object->sala = x2s($item->SALA);
-        $array[] = $object;
+        list($nome , $partido) = explode('-',x2s($item->VEREADOR));
+        $object                = new StdClass;
+        //$object->id          = $id_interno;
+        $object->nome          = trim($nome);
+        $object->partido       = x2s($item->PARTIDO);
+        $object->ramal         = x2s($item->RAMAL);
+        $object->fax           = x2s($item->FAX);
+        $object->sala          = x2s($item->SALA);
+        $object->gabinete_id   = x2s($item->GV);
+        $object->promovente_id = x2l($item->COD_PRVM_APL);
+        $object->criacao       = $criacao;
+        $array[]               = $object;
     }
     return $array;
 }
 
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
-
     try {
+        $mapper = config()->mapper;
         $return = vereadores();
         writeln(count($return) . ' resultados');
+        foreach ($return as $row) {
+            $partido = $mapper->partido(array('sigla'=>$row->partido))->fetch();
+            if (!$partido) {
+                $partido        = new StdClass;
+                $partido->sigla = $row->partido;
+                $mapper->partido->persist($partido);
+                $mapper->flush();
+            }
+            
+        }
         writeln('Finished!');
         exit (0);
 

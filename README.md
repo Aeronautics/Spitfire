@@ -32,6 +32,7 @@ in this repository) can be changed!
 API
 ---
 
+/legislativo/tse
 /sp/sao-paulo/legislativo/sessoes-plenarias/2012/04/12
 
 /sp/sao-paulo/legislativo/partidos/PT
