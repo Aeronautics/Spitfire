@@ -44,7 +44,7 @@ function vereadores()
 
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     try {
-        $mapper = config()->mapper;
+        $mapper = config()->relational;
         $return = vereadores();
         writeln(count($return) . ' resultados');
         foreach ($return as $row) {

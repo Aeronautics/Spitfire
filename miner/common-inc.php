@@ -3,7 +3,7 @@
 /* Bootstrap */
 require_once __DIR__ . '/../bootstrap.php';
 
-$config = new Respect\Config\Container('conf/application.ini');
+$config = new Respect\Config\Container('conf/manifest.ini');
 
 /**
  * @return Respect\Config\Container
@@ -11,7 +11,7 @@ $config = new Respect\Config\Container('conf/application.ini');
 function config() {
     global $config;
 
-    return $config;
+    return $config->container;
 }
 
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
