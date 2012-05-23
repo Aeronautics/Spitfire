@@ -28,16 +28,15 @@ The database isntructions can be found in a [GIST](https://gist.github.com/26679
 while in development. Please, **be aware** that everything in this database (while not 
 in this repository) can be changed!
 
-
 API
 ---
 
-/legislativo/tse
-/sp/sao-paulo/legislativo/sessoes-plenarias/2012/04/12
+/legislativo/tse/partidos
+/legislativo/sp/sao-paulo/sessoes-plenarias/2012/04/12
+/legislativo/sp/sao-paulo/partidos/PT
 
-/sp/sao-paulo/legislativo/partidos/PT
-
-
+Estrutura sugerida
+------------------
 
 * União
     * Executivo

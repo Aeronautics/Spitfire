@@ -1,4 +1,11 @@
 <?php
+/**
+ * Lista de vereadores do estado de São Paulo
+ * 
+ * nome     : Nome do Vereador
+ * img      : Foto do Vereador
+ * biografia: Pequeno texto biográfico do Vereador
+ */
 
 /* Common */
 require_once __DIR__ . '/common-inc.php';
@@ -10,21 +17,17 @@ require_once __DIR__ . '/common-inc.php';
  */
 function vereadores_sp()
 {
-    $config = new Respect\Config\Container('conf/manifest.ini');
-
-    /* @var $mapper Respect\Relational\Mapper */
-    $mapper =  $config->container->relational;
-
     $base   = 'http://www1.camara.sp.gov.br';
     $url    = $base . '/vereadores_joomla.asp';
-    debug('Fetching from url "%s"', $url);
+    $url    = 'vereadores_joomla.asp';
+    debug('Baixando "%s"', $url);
     $content = file_get_contents($url);
 
     if (empty($content)) {
         throw new Exception('Sem resultado em ' . $url);
     }
 
-    debug('Parsing fetched data');
+    debug('Parseando dados ...');
 
     $lines      = explode(PHP_EOL, $content);
     $content    = $lines[11];
@@ -39,22 +42,21 @@ function vereadores_sp()
     $content    = preg_replace_callback(
         '@(<a href="vereador_joomla2\.asp\?vereador=(?P<id>[0-9]+)">(?P<nome>[^<]+)</a>)@m',
         function ($matches) use (&$vereadores) {
-            $id                 = $matches['id'];
-            $nome               = utf8_encode(trim($matches['nome']));
-            $vereadores[$id]    = array(
-                'nome'  => preg_replace('/([^(]+)\s?\(.+/', '$1', $nome)
-            );
+            $id                    = $matches['id'];
+            $nome                  = utf8_encode(trim($matches['nome']));
+            $vereadores[$id]       = new StdClass;
+            $vereadores[$id]->nome = preg_replace('/([^(]+)\s?\(.+/', '$1', $nome);
+            debug('Identificado vereador: '.$vereadores[$id]->nome);
         },
         $content
     );
 
-    foreach (array_keys($vereadores) as $id) {
-        $vereador =& $vereadores[$id];
-        $url = $base. '/vereador_joomla2.asp?vereador=' . $id;
-        debug('Fetching data of "%s"', $url);
+    foreach ($vereadores as $id=>$vereador) {
+        $url      = $base. '/vereador_joomla2.asp?vereador=' . $id;
+        debug('Baixando  "%s"', $url);
         /* @var $data tidy */
         $data   = file_get_contents($url);
-        debug('Parsing data');
+        debug('Parseando');
         $data   = tidy_repair_string($data, array('output-xml' =>true));
         $data   = str_replace('&nbsp;', '', $data);
         /* @var $data SimpleXMLElement */
@@ -88,12 +90,12 @@ function vereadores_sp()
         $biografia  = preg_replace('/\n+/', PHP_EOL, $biografia);
 
         if (getenv('DEBUG') > 1) {
-            $vereador['img'] = $img;
+            $vereador->img = $img;
         } else {
-            $vereador['img'] = file_get_contents($img);
+            $vereador->img = file_get_contents($img);
         }
-        $vereador['biografia'] = $biografia;
-        unset($vereador);
+        $vereador->biografia = $biografia;
+        $vereadores[$id]     = $vereador;
     }
     return $vereadores;
 };
@@ -101,8 +103,29 @@ function vereadores_sp()
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 
     try {
-
-        $return = vereadores_sp();
+        writeln('Baixando e parseando XML de vereadores em São Paulo');
+        $criacao = date('Y-m-d H:i:s');
+        $mapper  = config()->relational;
+        $return  = vereadores_sp();
+        debug('Gravar dados no banco ...');
+        foreach ($return as $row) {
+            debug('Mantendo vereador: '.$row->nome);
+            $vereador = $mapper->politico(array('nome'=>$row->nome))->fetch();
+            if (!$vereador) {
+                $vereador            = new StdClass;
+                $vereador->id        = null;
+                $vereador->nome      = $row->nome;
+                $mapper->politico->persist($vereador);
+                debug('Inserido veriador: '.$row->nome);
+                $mapper->flush();
+            }
+            $vereador->biografia = $row->biografia;
+            $vereador->foto      = $row->img;
+            debug('Atualizado (foto e biografia): '.$row->nome);
+            $mapper->politico->persist($vereador);
+        }
+        debug('Executando alterações ...');
+        $mapper->flush();
         writeln(count($return) . ' vereadores encontrados em São Paulo');
         writeln('Finished!');
         exit (0);
@@ -112,5 +135,4 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
         writeln_error($exc->getTraceAsString());
         exit (1);
     }
-
 }
