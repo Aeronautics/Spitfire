@@ -25,15 +25,20 @@ a list of the comand lines required to install everything.
     sudo pear install Respect/Validation-0.4.4
 
 The database isntructions can be found in a [GIST](https://gist.github.com/2667935)
-while in development. Please, **be aware** that everything in this database (while not 
-in this repository) can be changed!
+while in development. Please, **be aware** that everything in this database 
+(while not in this repository) can be changed! The best option is to use 
+[MySQL Workbench](http://dev.mysql.com/downloads/workbench/) and use the 
+```doc/spitifire.mwb``` to syncronise the database.
 
 API
 ---
 
-/legislativo/tse/partidos
-/legislativo/sp/sao-paulo/sessoes-plenarias/2012/04/12
-/legislativo/sp/sao-paulo/partidos/PT
+* /legislativo/tse/partidos
+    * /legislativo/tse/partidos.xml
+    * /legislativo/tse/partidos.json
+    * /legislativo/tse/partidos.js
+* /legislativo/sp/sao-paulo/sessoes-plenarias/2012/04/12
+* /legislativo/sp/sao-paulo/partidos/PT
 
 Estrutura sugerida
 ------------------
