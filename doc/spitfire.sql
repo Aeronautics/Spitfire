@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`partido` (
   `deferimento` VARCHAR(155) NULL ,
   `numero` INT(3) NULL ,
   `criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
-  `endereço` TEXT NULL ,
+  `endereco` TEXT NULL ,
   `telefone` VARCHAR(45) NULL ,
   `cep` CHAR(8) NULL ,
   `fax` VARCHAR(45) NULL ,
