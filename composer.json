@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php": ">=5.3.0",
+        "respect/rest": "*",
+        "respect/config": "*",
+        "respect/relational": "*",
+        "respect/validation": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Aeronautics\\Spitfire": "src"
+        }
+    }
+}

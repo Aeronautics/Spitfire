@@ -1,7 +1,9 @@
+.*
 *.bak
+*.lock
+*.phar
 /.foundation/
 /reports/
 /nbproject/
 conf/relational.ini
-.settings
-.c9revisions
+/vendor/
