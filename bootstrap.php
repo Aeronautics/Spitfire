@@ -3,12 +3,15 @@
 /* Timezone */
 date_default_timezone_set('America/Sao_Paulo');
 
+defined('APPLICATION_ROOT')
+    || define('APPLICATION_ROOT', __DIR__);
+
 /* Autoloader */
 if (!($autoload = @include __DIR__ . '/vendor/autoload.php')) {
 
     /* Include path */
     set_include_path(implode(PATH_SEPARATOR, array(
-        __DIR__ . '/src',
+        APPLICATION_ROOT . '/src',
         get_include_path(),
     )));
 
