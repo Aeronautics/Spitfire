@@ -11,15 +11,17 @@ USE `hackathon_cmsp` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`politico` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`politico` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `criacao` DATETIME NOT NULL ,
   `nome` VARCHAR(45) NOT NULL ,
   `sala` VARCHAR(45) NULL ,
   `fax` VARCHAR(55) NULL ,
   `ramal` VARCHAR(255) NULL ,
   `promovente_id` INT NULL COMMENT 'Nó no XML: COD_PRVM_APL\nDescrição: Código de promovente do(a) Sr.(a) Vereador(a)\nURL: http://www2.camara.sp.gov.br/Dados_abertos/vereador/Lista_Vereadores.xml' ,
   `gabinete_id` INT NULL COMMENT 'Nó no XML: GV\nDescrição: Número do Gabinete\nURL: http://www2.camara.sp.gov.br/Dados_abertos/vereador/Lista_Vereadores.xml' ,
+  `biografia` TEXT NULL ,
+  `foto` BLOB NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -29,7 +31,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`sessaoTipo` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`sessaoTipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`sessaoTipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(45) NOT NULL ,
   `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -42,13 +44,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`esfera` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sigla` VARCHAR(10) NOT NULL ,
   `nome` VARCHAR(255) NOT NULL ,
   `poder` ENUM('Judiciario', 'Legislativo', 'Executivo') NOT NULL ,
   `limite` ENUM('Uniao', 'Estado', 'Município') NOT NULL ,
-  `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `criacao` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'É a esfera política onde' ;
@@ -59,7 +61,7 @@ COMMENT = 'É a esfera política onde' ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`sessao` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`sessao` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`sessao` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `esfera_id` INT NOT NULL ,
   `sessaoTipo_id` INT NOT NULL ,
@@ -88,20 +90,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`partido` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`partido` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`partido` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sigla` VARCHAR(5) NOT NULL ,
-  `nome` VARCHAR(255) NULL COMMENT ' ' ,
-  `presidenteNacional` VARCHAR(255) NULL ,
-  `deferimento` VARCHAR(155) NULL ,
-  `numero` INT(3) NULL ,
-  `criacao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `nome` VARCHAR(255) NULL COMMENT '  ' ,
+  `criacao` DATETIME NULL ,
   `endereco` TEXT NULL ,
   `telefone` VARCHAR(45) NULL ,
   `cep` CHAR(8) NULL ,
   `fax` VARCHAR(45) NULL ,
   `site` VARCHAR(255) NULL ,
   `email` VARCHAR(255) NULL ,
+  `numero` INT(5) NULL ,
+  `deferimento` VARCHAR(155) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -111,11 +112,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`politicoNome` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`politicoNome` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politicoNome` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `politico_id` INT NOT NULL ,
   `nome` VARCHAR(255) NOT NULL ,
-  `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `criacao` DATETIME NOT NULL ,
   PRIMARY KEY (`id`, `politico_id`) ,
   CONSTRAINT `fk_nome_parlamentar1`
     FOREIGN KEY (`politico_id` )
@@ -130,9 +131,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`mandato` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `criacao` DATETIME NOT NULL ,
   `inicio` DATE NOT NULL ,
   `fim` DATE NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -144,7 +145,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`presenca` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`presenca` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`presenca` (
   `id` INT NOT NULL ,
   `sessao_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -171,7 +172,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`votacao` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`votacao` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`votacao` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sessao_id` INT NOT NULL ,
   `id_interno` TEXT NOT NULL ,
@@ -197,7 +198,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`voto` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`voto` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`voto` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `votacao_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -224,7 +225,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`meteriaTipo` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`meteriaTipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`meteriaTipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `codigo` VARCHAR(45) NOT NULL ,
@@ -238,7 +239,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`materia` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`materia` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `id_interno` TEXT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -265,7 +266,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`despesatipo` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`despesatipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`despesatipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `descricao` VARCHAR(45) NOT NULL ,
@@ -278,7 +279,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`empresa` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`empresa` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`empresa` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `cnpj` INT NOT NULL ,
   `razao_social` VARCHAR(255) NOT NULL ,
@@ -293,7 +294,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`despesa` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`despesa` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`despesa` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `valor` FLOAT NOT NULL ,
@@ -327,7 +328,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`materiaTag` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`materiaTag` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materiaTag` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(45) NOT NULL ,
   `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -340,7 +341,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`materia_materiatag` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`materia_materiatag` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materia_materiatag` (
   `materia_id` INT NOT NULL ,
   `materiaTag_id` INT NOT NULL ,
   INDEX `fk_materia_materiatag_materiatag` (`materiaTag_id` ASC) ,
@@ -364,12 +365,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`esfera_mandato` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera_mandato` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera_mandato` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `esfera_id` INT NOT NULL ,
   `mandato_id` INT NOT NULL ,
-  PRIMARY KEY (`esfera_id`, `mandato_id`) ,
   INDEX `fk_esfera_mandato_mandato1` (`mandato_id` ASC) ,
   INDEX `fk_esfera_mandato_esfera1` (`esfera_id` ASC) ,
+  PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_esfera_mandato_esfera1`
     FOREIGN KEY (`esfera_id` )
     REFERENCES `hackathon_cmsp`.`esfera` (`id` )
@@ -388,10 +390,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`mandato_politico` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato_politico` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato_politico` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `mandato_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
-  PRIMARY KEY (`mandato_id`, `politico_id`) ,
+  PRIMARY KEY (`id`) ,
   INDEX `fk_mandato_parlamentar_parlamentar1` (`politico_id` ASC) ,
   INDEX `fk_mandato_parlamentar_mandato1` (`mandato_id` ASC) ,
   CONSTRAINT `fk_mandato_parlamentar_mandato1`
@@ -412,11 +415,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`partido_presidente` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`partido_presidente` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`partido_presidente` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `partido_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
-  `partido_id` VARCHAR(15) NOT NULL ,
   `desde` DATETIME NOT NULL ,
-  PRIMARY KEY (`politico_id`, `partido_id`) ,
+  PRIMARY KEY (`id`) ,
   INDEX `fk_politico_partido_partido1` (`partido_id` ASC) ,
   INDEX `fk_politico_partido_politico1` (`politico_id` ASC) ,
   CONSTRAINT `fk_politico_partido_politico1`
@@ -437,11 +441,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hackathon_cmsp`.`politico_partido` ;
 
-CREATE TABLE IF NOT EXISTS `hackathon_cmsp`.`politico_partido` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politico_partido` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `politico_id` INT NOT NULL ,
-  `partido_id` VARCHAR(15) NOT NULL ,
+  `partido_id` INT NOT NULL ,
   `desde` DATETIME NOT NULL ,
-  PRIMARY KEY (`politico_id`, `partido_id`) ,
+  PRIMARY KEY (`id`) ,
   INDEX `fk_politico_partido_partido2` (`partido_id` ASC) ,
   INDEX `fk_politico_partido_politico2` (`politico_id` ASC) ,
   CONSTRAINT `fk_politico_partido_politico2`
