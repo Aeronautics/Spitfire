@@ -35,9 +35,9 @@ API
 
 Only GET.
 
-* `/legislativo/partidos` `[ .js, .xml, .json ]`
-* `/legislativo/TSE/partidos/` `{PARTIDO}` `[ .js | .xml | .json ]`
-    * `/legislativo/TSE/partidos/` `{PARTIDO}` `/politicos` `[ .js | .xml | .json ]`
+* /legislativo/partidos_[ .js, .xml, .json ]_
+* /legislativo/TSE/partidos/___{PARTIDO}____[ .js | .xml | .json ]_
+* /legislativo/TSE/partidos/___{PARTIDO}___/politicos_[ .js | .xml | .json ]_
 
 Estrutura sugerida
 ------------------
