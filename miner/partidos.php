@@ -74,16 +74,16 @@ try {
                 $message = 'Atualizado partido id: %d';
             }
 
-            $object->nome = utf8_decode(trim($entities->item(0)->childNodes->item(2)->textContent));
+            $object->nome = trim($entities->item(0)->childNodes->item(2)->textContent);
             $object->sigla = $partido->sigla;
-            //$object->presidenteNacional = utf8_decode(trim($entities->item(1)->childNodes->item(2)->textContent));
-            $object->deferimento = utf8_decode(trim($partido->deferimento));
+            //$object->presidenteNacional = trim($entities->item(1)->childNodes->item(2)->textContent);
+            $object->deferimento = trim($partido->deferimento);
             $object->numero = trim($partido->numero);
-            $object->endereco = utf8_decode(trim($entities->item(2)->childNodes->item(2)->textContent));
+            $object->endereco = trim($entities->item(2)->childNodes->item(2)->textContent);
             $object->telefone = trim($entities->item(3)->childNodes->item(2)->textContent);
             $object->site = trim($entities->item(4)->childNodes->item(2)->textContent);
             $object->cep = trim($entities->item(2)->childNodes->item(6)->textContent);
-            $object->fax = utf8_decode(trim($entities->item(3)->childNodes->item(6)->textContent));
+            $object->fax = trim($entities->item(3)->childNodes->item(6)->textContent);
 
             $emailList = $xpath->query('a', $entities->item(4)->childNodes->item(6));
             if ($emailList->length == 0) {
