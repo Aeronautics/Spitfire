@@ -26,18 +26,18 @@ try {
                 if (!empty($text)) {
                     $array[$key][] = trim($column->textContent);
                 }
-            }
-            unset($array[$key][0]);
+            }            
+            array_shift($array[$key]);
+            $el = count($array[$key]);
+            if ($el > 5 || $el < 5) continue; 
             $combined = array_combine(array('sigla', 'nome', 'deferimento', 'presidente', 'numero'), $array[$key]);
             $combined['resourcePartido'] = trim($xpath->query('.//a', $columns->item(2))->item(0)->attributes->getNamedItem('href')->nodeValue);
             $array[$key] = (object) $combined;
         }
-
-        end($array);
-        unset($array[key($array)]);
+        array_pop($array);
         return $array;
     };
-
+    
     $mapper = config()->relational;
     // yeah, I could do this up there, but I do not want. 
     $partidosInfo = function() use ($partidos, $dom, $mapper) {
@@ -77,8 +77,8 @@ try {
             $object->nome = utf8_decode(trim($entities->item(0)->childNodes->item(2)->textContent));
             $object->sigla = $partido->sigla;
             $object->presidenteNacional = utf8_decode(trim($entities->item(1)->childNodes->item(2)->textContent));
-            $object->deferimento = $partido->deferimento;
-            $object->numero = $partido->numero;
+            $object->deferimento = utf8_decode(trim($partido->deferimento));
+            $object->numero = trim($partido->numero);
             $object->endereco = utf8_decode(trim($entities->item(2)->childNodes->item(2)->textContent));
             $object->telefone = trim($entities->item(3)->childNodes->item(2)->textContent);
             $object->site = trim($entities->item(4)->childNodes->item(2)->textContent);
@@ -86,6 +86,13 @@ try {
             $object->fax = utf8_decode(trim($entities->item(3)->childNodes->item(6)->textContent));
 
             $emailList = $xpath->query('a', $entities->item(4)->childNodes->item(6));
+            if ($emailList->length == 0) {
+                $emailList = $xpath->query('div//a', $entities->item(4)->childNodes->item(6));
+                if ($emailList->length == 0) {
+                    $emailList = $xpath->query('b//a', $entities->item(4)->childNodes->item(6));
+                }
+            } 
+            
             foreach ($emailList as $email) {
                 $email = trim($email->textContent);
                 if (!empty($email)) {
