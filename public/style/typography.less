@@ -1,0 +1,290 @@
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu Light'), local('Ubuntu-Light'), url('http://themes.googleusercontent.com/static/fonts/ubuntu/v4/_aijTyevf54tkVDLy-dlnD8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Ubuntu Italic'), local('Ubuntu-Italic'), url('http://themes.googleusercontent.com/static/fonts/ubuntu/v4/kbP_6ONYVgE-bLa9ZRbvvvesZW2xOQ-xsNqO47m55DA.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Ubuntu Light Italic'), local('Ubuntu-LightItalic'), url('http://themes.googleusercontent.com/static/fonts/ubuntu/v4/DZ_YjBPqZ88vcZCcIXm6VobN6UDyHWBl620a-IRfuBk.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Ubuntu'), url('http://themes.googleusercontent.com/static/fonts/ubuntu/v4/_xyN3apAT_yRRDeqB3sPRg.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Ubuntu Mono Bold Italic'), local('UbuntuMono-BoldItalic'), url('http://themes.googleusercontent.com/static/fonts/ubuntumono/v3/n_d8tv_JOIiYyMXR4eaV9QRV2F9RPTaqyJ4QibDfkzM.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url('http://themes.googleusercontent.com/static/fonts/ubuntumono/v3/ceqTZGKHipo8pJj4molytjqR_3kx9_hJXbbyU8S6IN0.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url('http://themes.googleusercontent.com/static/fonts/ubuntumono/v3/ViZhet7Ak-LRXZMXzuAfkYbN6UDyHWBl620a-IRfuBk.woff') format('woff');
+}
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url('http://themes.googleusercontent.com/static/fonts/ubuntumono/v3/KAKuHXAHZOeECOWAHsRKA9kZXW4sYc4BjuAIFc1SXII.woff') format('woff');
+}
+
+@fontSize: 100%;
+@textSize: 10px;
+@textColor: #555;
+@headingColor: darken(@textColor, 10%);
+
+body, form, table {
+	font-size: @fontSize;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    color: @textColor;
+}
+
+pre,
+code,
+kbd,
+samp,
+var {
+    font-family: "Ubuntu Mono", monospace;
+    color: @textColor;
+}
+
+code,
+kbd,
+samp,
+var {
+	background-color: lighten(@textColor, 60%);
+    border: 0.05em solid lighten(@textColor, 60%);
+    border-radius: 5px;
+    padding: 0.15em;
+}
+
+pre code {
+	display: block;
+	padding: 1em;
+}
+
+mark {
+    background-color: lighten(#FF0, 30%);
+    border: 0.05em solid lighten(#FF0, 30%);
+    border-radius: 5px;
+    padding: 0.15em;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a {
+	text-decoration: none;
+	color: #4444FF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hgroup {
+	color: @headingColor;
+	font-weight: 300;
+	letter-spacing: -0.04em;
+	word-spacing: 0.15em;
+	border-bottom: 0.05em solid lighten(@textColor, 50%);
+	padding-bottom: 0.3em;
+}
+
+h1,
+fieldset legend {
+    font-size: 2em;
+}
+
+h2,
+fieldset fieldset legend {
+    font-size: 1.5em;
+}
+
+h3,
+fieldset fieldset fieldset legend {
+    font-size: 1.17em;
+}
+
+h4,
+fieldset fieldset fieldset fieldset legend {
+    font-size: 1em;
+}
+
+h5,
+fieldset fieldset fieldset fieldset fieldset legend {
+    font-size: 0.83em;
+}
+
+h6,
+fieldset fieldset fieldset fieldset fieldset fieldset legend {
+    font-size: 0.75em;
+}
+
+hgroup h1,
+hgroup h2,
+hgroup h3,
+hgroup h4,
+hgroup h5,
+hgroup h6 {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+b, strong {
+	font-weight: bolder;
+}
+
+hgroup {
+	* {
+		margin: 0;
+	}
+	:last-child {
+		color: lighten(@headingColor, 30%);
+	}
+	margin: 1em 0;
+}
+
+blockquote {
+	margin: 0;
+	border-left: 0.4em solid lighten(@textColor, 50%);
+	padding: 0.5em;
+}
+
+blockquote cite {
+	display: block;
+	font-style: normal;
+	color: lighten(@textColor, 30%);
+	margin-top: 0.5em;
+}
+
+blockquote cite:before {
+	content: "— ";
+} 
+
+ul ul,
+ul ol,
+ul dl,
+ol ul,
+ol ol,
+ol dl,
+dl ul,
+dl ol,
+dl dl {
+	margin-top: 0.3em;
+}
+
+dl dt {
+	font-weight: bolder;
+	margin-top: 0.2em;
+}
+
+dl dt:first-child {
+	margin-top: 0;
+}
+
+dl dd {
+	margin-left: 1.5em;
+}
+
+table {
+	border-collapse: collapse;
+	empty-cells: hide;
+}
+
+table caption {
+	text-align: left;
+}
+
+table caption * {
+	margin-bottom: 0;
+}
+
+table td, table th {
+	padding: 0.5em;
+}
+
+table tr {
+	border-bottom: 0.05em solid lighten(@textColor, 50%);
+}
+
+table th {
+	font-weight: bolder;
+	text-align: left;
+}
+
+table td[colspan], table th[colspan] {
+	border: 0.05em solid lighten(@textColor, 50%);
+}
+
+
+table td[colspan]:first-child, table th[colspan]:first-child {
+	border-left: 0;
+}
+
+table td[colspan]:last-child, table th[colspan]:last-child {
+	border-right: 0;
+}
+
+table tr:hover > * {
+	background-color: lighten(@textColor, 60%);
+}
+
+legend {
+	padding-right: 0.4em;
+}
+
+fieldset {
+	padding: 0;
+	border: 0;
+	border-top: 0.05em solid lighten(@textColor, 50%);
+}
+
+fieldset {
+	line-height: 3em;
+}
+
+label {
+	display: block; 
+}
+
+@media (min-width: 720px) {
+	hgroup {
+		* {
+			display: inline;
+		}
+		:last-child {
+			padding-left: 0.3em;
+		}
+	}
+}
