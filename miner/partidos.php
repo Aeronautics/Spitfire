@@ -101,6 +101,18 @@ try {
             }
 
             $mapper->partido->persist($object);
+            //aos que sabem implemente a clausula like e be happy.
+            $politico = $mapper->politico(array('nome' => $partido->presidente))->fetch();
+            
+            if ($politico) {
+                $pp = new StdClass;
+                $pp->id = null;
+                $pp->desde = date('Y-m-d H:i:s');
+                $pp->partido_id = $object->id;
+                $pp->politico_id = $politico->id;
+                $mapper->partido_presidente->persist($pp);
+            }
+
             $mapper->flush();
             writeln(sprintf($message, $object->id));
             $infos[$partido->sigla] = $object;
