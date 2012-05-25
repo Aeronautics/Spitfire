@@ -33,12 +33,11 @@ while in development. Please, **be aware** that everything in this database
 API
 ---
 
-* /legislativo/tse/partidos
-    * /legislativo/tse/partidos.xml
-    * /legislativo/tse/partidos.json
-    * /legislativo/tse/partidos.js
-* /legislativo/sp/sao-paulo/sessoes-plenarias/2012/04/12
-* /legislativo/sp/sao-paulo/partidos/PT
+Only GET.
+
+* `/legislativo/partidos` `[ .js, .xml, .json ]`
+* `/legislativo/TSE/partidos/` `{PARTIDO}` `[ .js | .xml | .json ]`
+    * `/legislativo/TSE/partidos/` `{PARTIDO}` `/politicos` `[ .js | .xml | .json ]`
 
 Estrutura sugerida
 ------------------
