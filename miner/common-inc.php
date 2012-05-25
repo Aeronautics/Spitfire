@@ -3,7 +3,7 @@
 /* Bootstrap */
 require_once __DIR__ . '/../bootstrap.php';
 
-$config = new Respect\Config\Container('conf/manifest.ini');
+$config = new Respect\Config\Container('../conf/manifest.ini');
 
 /**
  * @return Respect\Config\Container
