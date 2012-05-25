@@ -76,7 +76,7 @@ try {
 
             $object->nome = utf8_decode(trim($entities->item(0)->childNodes->item(2)->textContent));
             $object->sigla = $partido->sigla;
-            $object->presidenteNacional = utf8_decode(trim($entities->item(1)->childNodes->item(2)->textContent));
+            //$object->presidenteNacional = utf8_decode(trim($entities->item(1)->childNodes->item(2)->textContent));
             $object->deferimento = utf8_decode(trim($partido->deferimento));
             $object->numero = trim($partido->numero);
             $object->endereco = utf8_decode(trim($entities->item(2)->childNodes->item(2)->textContent));
