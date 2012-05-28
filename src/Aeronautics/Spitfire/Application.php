@@ -10,7 +10,7 @@ class Application extends Router
 	public $mapper;
 	public $vHost;
 	public $request;
-	
+
 	public function __construct($virtualHost=null)
 	{
 		define('VIRTUAL_HOST', 'http://'.$_SERVER['HTTP_HOST'].($virtualHost ?: ''));
@@ -32,7 +32,7 @@ class Application extends Router
 			$lastArgumentParts = explode('.', $lastArgument, 2);
 			if (isset($lastArgumentParts[1]))
 				define('VIRTUAL_EXTENSION', '.'.$lastArgumentParts[1]);
-			else 
+			else
 				define('VIRTUAL_EXTENSION', '');
 			$arguments[] = $lastArgumentParts[0];
 		} else {
@@ -41,7 +41,7 @@ class Application extends Router
 		$controller = array();
 		$params = array();
 
-		foreach ($arguments as $n => $a) 
+		foreach ($arguments as $n => $a)
 			if (is_numeric($a) || mb_strtoupper($a) === $a) {
 				$params[] = $a;
 				$arguments[$n] = '*';
@@ -59,111 +59,22 @@ class Application extends Router
 			die('Class not found: '.$controllerClass);
 
 		$router->any('/'.implode('/', $arguments), $controllerClass, array($router->mapper));
-		$router->always('Accept', array(
-			'application/json' => $jsonRenderer = function($data) {
-				header('Content-Type: application/json');
-				return json_encode($data);	
-			},
-			'.json' => $jsonRenderer,
-			'text/xml' => $xmlRenderer = function($data) use ($router) {
-				header('Content-Type: text/xml');
-				$rootName = key($data);
-				$xmlRoot = simplexml_load_string("<$rootName/>");
-				$router->xmlConverter($xmlRoot, $data[$rootName]);
-				$dom = new \DOMDocument;
-				$dom->formatOutput = true;
-				$dom->loadXml($xmlRoot->asXML());
-				return $dom->saveXML();
-			},
-			'.xml' => $xmlRenderer,
-			'text/html' => $htmlRenderer = function($data) use ($router) {
-				header('Content-Type: text/html');
-				$rootName = key($data);
-				$xmlRoot = simplexml_load_string(<<<XML
-					<html>
-						<head>
-						    <title>Spitfirife</title>
-						    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
-						</head>
-						<body>
-							<article class="$rootName">
-								<ul/>
-							</article>
-						</body>
-					</html>
-XML
-				);
-				$router->htmlConverter($xmlRoot->body->article->ul, $data[$rootName]);
-				$dom = new \DOMDocument;
-				$dom->loadXml($xmlRoot->asXML());
-				$dom->formatOutput = true;
-				return '<!DOCTYPE html>'.$dom->saveHtml();
-			},
-			'.html' => $htmlRenderer
-		));
-	}
 
-	public function xmlConverter($xmlRoot, $data)
-	{
-		if (is_array($data) || is_object($data))
-			foreach ($data as $k => $v) {
-				if (is_numeric($k)) {
-					$child = $xmlRoot->addChild('item');
-					$this->xmlConverter($child, $v);
-				} elseif (is_scalar($v) || is_null($v)) {
-					$xmlRoot->addAttribute($k, $v);
-				} elseif ($k == 'links') {
-					foreach ($v as $link) {
-						$linkElem = $xmlRoot->addChild('link');
-						foreach ($link as $attribute => $attrValue)
-							$linkElem->addAttribute($attribute, $attrValue);
-					}
-				} else {
-					$child = $xmlRoot->addChild($k);
-					$this->xmlConverter($child, $v);
-				}
-			}
-		return $data;
-	}
+        $jsonRenderer   = array(new Renders\Json($router), 'render');
+        $xmlRenderer    = array(new Renders\Xml($router), 'render');
+        $htmlRenderer   = array(new Renders\Html($router), 'render');
 
-	public function htmlConverter($xmlRoot, $data)
-	{
-		if (is_array($data) || is_object($data))
-			foreach ($data as $k => $v) {
-				if (is_numeric($k)) {
-					$child = $xmlRoot->addChild('li');
-					$child = $child->addChild('dl');
-					$this->htmlConverter($child, $v);
-				} elseif (is_scalar($v) || is_null($v)) {
-					if ('ul' === $xmlRoot->getName()) {
-						$xmlRoot = $xmlRoot->addChild('li');
-						$xmlRoot = $xmlRoot->addChild('dl');
-					}
-					$xmlRoot->addChild('dt', $k);
-					if ($k == 'foto' && !empty($v)) {
-					    $dd     = $xmlRoot->addChild('dd');
-					    $img    = $dd->addChild('img');
-                        $base64 = base64_encode($v);
-					    $img->addAttribute('src', 'data:image/png;base64,' . $base64);
-					} else {
-					    $xmlRoot->addChild('dd', $v);
-					}
-				} elseif ($k == 'links') {
-					$xmlRoot->addChild('dt', 'Links');
-					$nav = $xmlRoot->addChild('dd');
-					$nav = $nav->addChild('ul');
-					foreach ($v as $link) {
-						$linkElem = $nav->addChild('li');
-						$linkElem = $linkElem->addChild('a', $link['title'] ?: $link['href']);
-						foreach ($link as $attribute => $attrValue)
-							$linkElem->addAttribute($attribute, $attrValue);
-					}
-				} else {
-					$child = $xmlRoot->addChild('li');
-					$this->htmlConverter($child, $v);
-				}
-			}
-		return $data;
+		$router->always(
+            'Accept',
+            array(
+                'application/json'  => $jsonRenderer,
+                '.json'             => $jsonRenderer,
+                'text/xml'          => $xmlRenderer,
+                '.xml'              => $xmlRenderer,
+                'text/html'         => $htmlRenderer,
+                '.html'             => $htmlRenderer
+            )
+        );
 	}
 
 	public function init()
