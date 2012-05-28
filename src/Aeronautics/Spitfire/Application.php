@@ -82,8 +82,8 @@ class Application extends Router
 				$xmlRoot = simplexml_load_string(<<<XML
 					<html>
 						<head>
-						    <link rel="stylesheet" href="/style/style.less" type="text/less"/>
-						    <script src="/js/less-1.1.3.min.js" type="text/javascript"> </script>
+						    <title>Spitfirife</title>
+						    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
 						</head>
 						<body>
 							<article class="$rootName">
@@ -140,7 +140,14 @@ XML
 						$xmlRoot = $xmlRoot->addChild('dl');
 					}
 					$xmlRoot->addChild('dt', $k);
-					$xmlRoot->addChild('dd', $v);
+					if ($k == 'foto' && !empty($v)) {
+					    $dd     = $xmlRoot->addChild('dd');
+					    $img    = $dd->addChild('img');
+                        $base64 = base64_encode($v);
+					    $img->addAttribute('src', 'data:image/png;base64,' . $base64);
+					} else {
+					    $xmlRoot->addChild('dd', $v);
+					}
 				} elseif ($k == 'links') {
 					$xmlRoot->addChild('dt', 'Links');
 					$nav = $xmlRoot->addChild('dd');
