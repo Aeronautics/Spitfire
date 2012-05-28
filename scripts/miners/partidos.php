@@ -1,7 +1,7 @@
 <?php
 
 /* Common */
-require_once __DIR__ . '/common-inc.php';
+require_once __DIR__ . '/../common-inc.php';
 
 try {
     $url = 'http://www.tse.jus.br/partidos/partidos-politicos';

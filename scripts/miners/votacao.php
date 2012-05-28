@@ -1,7 +1,7 @@
 <?php
 
 /* Common */
-require_once __DIR__ . '/common-inc.php';
+require_once __DIR__ . '/../common-inc.php';
 
 /**
 * @param string $date

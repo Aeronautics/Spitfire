@@ -1,7 +1,7 @@
 <?php
 
 /* Common */
-require_once __DIR__ . '/common-inc.php';
+require_once __DIR__ . '/../common-inc.php';
 
 $criacao = date('Y-m-d H:i:s');
 
