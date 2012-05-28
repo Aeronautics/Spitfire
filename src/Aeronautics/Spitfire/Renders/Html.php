@@ -58,8 +58,7 @@ class Html extends AbstractRender
                     if ($k == 'foto' && !empty($v)) {
                         $dd     = $xmlRoot->addChild('dd');
                         $img    = $dd->addChild('img');
-                        $base64 = base64_encode($v);
-                        $img->addAttribute('src', 'data:image/png;base64,' . $base64);
+                        $img->addAttribute('src', 'data:image/png;base64,' . $v);
                     } else {
                         $dd     = $xmlRoot->addChild('dd', $v);
                     }

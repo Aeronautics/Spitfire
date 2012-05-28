@@ -95,7 +95,7 @@ function vereadores_sp()
         if (getenv('DEBUG') > 1) {
             $vereador->img = $img;
         } else {
-            $vereador->img = file_get_contents($img);
+            $vereador->img = base64_encode(file_get_contents($img));
         }
         $vereador->biografia = $biografia;
         $vereadores[$id]     = $vereador;

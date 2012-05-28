@@ -24,9 +24,6 @@ class Xml extends AbstractRender
                     $child = $xmlRoot->addChild('item');
                     $this->xmlConverter($child, $v);
                 } elseif (is_scalar($v) || is_null($v)) {
-                    if ($k == 'foto') {
-                        $v = base64_encode($v);
-                    }
                     $xmlRoot->addAttribute($k, $v);
                 } elseif ($k == 'links') {
                     foreach ($v as $link) {
