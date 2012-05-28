@@ -19,7 +19,6 @@ function vereadores_sp()
 {
     $base   = 'http://www1.camara.sp.gov.br';
     $url    = $base . '/vereadores_joomla.asp';
-    $url    = 'vereadores_joomla.asp';
     debug('Baixando "%s"', $url);
     $content = file_get_contents($url);
 
@@ -55,7 +54,11 @@ function vereadores_sp()
         $url      = $base. '/vereador_joomla2.asp?vereador=' . $id;
         debug('Baixando  "%s"', $url);
         /* @var $data tidy */
-        $data   = file_get_contents($url);
+        $data   = @file_get_contents($url);
+        if (!$data) {
+            writeln_error($url);
+            continue;
+        }
         debug('Parseando');
         $data   = tidy_repair_string($data, array('output-xml' =>true));
         $data   = str_replace('&nbsp;', '', $data);
