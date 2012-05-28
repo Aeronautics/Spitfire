@@ -60,9 +60,18 @@ class Application extends Router
 
 		$router->any('/'.implode('/', $arguments), $controllerClass, array($router->mapper));
 
-        $jsonRenderer   = array(new Renders\Json($router), 'render');
-        $xmlRenderer    = array(new Renders\Xml($router), 'render');
-        $htmlRenderer   = array(new Renders\Html($router), 'render');
+        $jsonRenderer   = function ($data) use ($router) {
+            $render = new Renders\Json($router);
+            return $render->render($data);
+        };
+        $xmlRenderer    = function ($data) use ($router) {
+            $render = new Renders\Xml($router);
+            return $render->render($data);
+        };
+        $htmlRenderer   = function ($data) use ($router) {
+            $render = new Renders\Html($router);
+            return $render->render($data);
+        };
 
 		$router->always(
             'Accept',
