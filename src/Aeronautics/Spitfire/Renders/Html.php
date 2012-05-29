@@ -12,6 +12,7 @@ class Html extends AbstractRender
         if (null === $this->labels) {
             $this->labels = parse_ini_file(__DIR__ . '/HtmlLabels.ini');
         }
+
         return $this->labels;
     }
 
@@ -21,6 +22,7 @@ class Html extends AbstractRender
         if (isset($labels[$label])) {
             $default = $labels[$label];
         }
+
         return $default;
     }
 
@@ -35,6 +37,7 @@ class Html extends AbstractRender
         $dom      = new \DOMDocument;
         $dom->loadXml($xmlRoot->asXML());
         $dom->formatOutput = true;
+
         return '<!DOCTYPE html>' . $dom->saveHtml();
     }
 
@@ -78,6 +81,7 @@ class Html extends AbstractRender
                     $this->htmlConverter($child, $v);
                 }
             }
+
         return $data;
     }
 
@@ -85,7 +89,6 @@ class Html extends AbstractRender
     {
         return 'text/html';
     }
-
 
 }
 

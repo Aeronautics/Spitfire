@@ -11,6 +11,7 @@ class Json extends AbstractRender
         if (defined('JSON_PRETTY_PRINT')) {
             $flags = JSON_PRETTY_PRINT;
         }
+
         return json_encode($data, $flags);
     }
 
@@ -18,7 +19,6 @@ class Json extends AbstractRender
     {
         return 'application/json';
     }
-
 
 }
 

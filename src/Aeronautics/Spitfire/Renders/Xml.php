@@ -13,6 +13,7 @@ class Xml extends AbstractRender
         $dom      = new \DOMDocument;
         $dom->formatOutput = true;
         $dom->loadXml($xmlRoot->asXML());
+
         return $dom->saveXML();
     }
 
@@ -36,6 +37,7 @@ class Xml extends AbstractRender
                     $this->xmlConverter($child, $v);
                 }
             }
+
         return $data;
     }
 
@@ -43,7 +45,6 @@ class Xml extends AbstractRender
     {
         return 'text/xml';
     }
-
 
 }
 

@@ -4,7 +4,6 @@ namespace Aeronautics\Spitfire\Parsers\CMSP;
 
 use \UnexpectedValueException as Value;
 use \DateTime;
-use \DateTimeZone;
 use \StdClass;
 use \SplFixedArray;
 
@@ -29,14 +28,15 @@ class Presenca
 
     protected function getSimpleXml($content=null)
     {
-        $content = $content ?: $this->getContent(new DateTime); 
+        $content = $content ?: $this->getContent(new DateTime);
         if (empty($content))
             throw new Value('Conteúdo inválido (em branco)!');
+
         return simplexml_load_string($content);
     }
 
     /**
-     * @param  string $content=null Valid XML
+     * @param  string        $content=null Valid XML
      * @return SplFixedArray
      */
     public function parsePresencesToArray($content=null)
@@ -55,6 +55,7 @@ class Presenca
             $object->horaEvento    = DateTime::createFromFormat('d/m/Y H:i:s', (string) $vereador['HoraEvento']);
             $array[$index++]       = $object;
         }
+
         return $array;
     }
 

@@ -22,13 +22,13 @@ abstract class AbstractRender
     public function render(array $data)
     {
         header('Content-type: ' . $this->getMimetype());
+
         return $this->getContent($data);
     }
 
     abstract public function getContent(array $data);
 
     abstract public function getMimetype();
-
 
 }
 

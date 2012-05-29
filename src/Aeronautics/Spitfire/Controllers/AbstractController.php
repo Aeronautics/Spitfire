@@ -7,10 +7,10 @@ use Respect\Relational\Mapper;
 
 class AbstractController implements Routable
 {
-	public $mapper;
+    public $mapper;
 
-	public function __construct(Mapper $mapper)
-	{
-		$this->mapper = $mapper;
-	}
+    public function __construct(Mapper $mapper)
+    {
+        $this->mapper = $mapper;
+    }
 }
