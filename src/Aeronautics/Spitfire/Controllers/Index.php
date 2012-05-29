@@ -12,20 +12,8 @@ class Index extends AbstractController
                 'links' => array(
                     array(
                         'title' => 'Poder Legislativo',
-                        'href'  => VIRTUAL_HOST . '/legislativo' . VIRTUAL_EXTENSION
-                    ),
-                    array(
-                        'title' => 'Poder Judiciário',
-                        'href'=> VIRTUAL_HOST . '/judiciario'. VIRTUAL_EXTENSION
-                    ),
-                    array(
-                        'title' => 'Poder Executivo',
-                        'href'=> VIRTUAL_HOST . '/executivo'. VIRTUAL_EXTENSION
-                    ),
-                    array(
-                        'title' => 'Estados',
-                        'href'=> VIRTUAL_HOST . '/estados'. VIRTUAL_EXTENSION
-                    ),
+                        'href'  => VIRTUAL_HOST . '/legislativo/partidos' . VIRTUAL_EXTENSION
+                    )
                 )
             )
         );
