@@ -3,20 +3,41 @@
 /* Bootstrap */
 require_once __DIR__ . '/../bootstrap.php';
 
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+    fwrite(STDERR, 'This file can not be called directly.' . PHP_EOL);
+    exit(1);
+}
+
 $config = new Respect\Config\Container(APPLICATION_ROOT.'/conf/manifest.ini');
 
 /**
  * @return Respect\Config\Container
  */
-function config() {
+function config()
+{
     global $config;
 
     return $config->container;
 }
 
-if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
-    fwrite(STDERR, 'This file can not be called directly.' . PHP_EOL);
-    exit(1);
+/**
+ * @param   string $string
+ * @return  string
+ */
+function normalize($string)
+{
+    $string     = mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
+    $exeptions  = array('Do', 'De', 'Da', 'Dos', 'Das');
+    foreach ($exeptions as $exeption) {
+        $string = preg_replace(
+            "/\b{$exeption}\b/", 
+            strtolower($exeption), 
+            $string
+        );
+    }
+    $string = preg_replace("/\s+/", ' ', $string);
+
+    return $string;
 }
 
 /**
