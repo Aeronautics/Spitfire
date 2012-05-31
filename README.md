@@ -24,7 +24,12 @@ a list of the comand lines required to install everything.
     sudo pear install Respect/Relational-0.4.4
     sudo pear install Respect/Validation-0.4.4
 
-The database isntructions can be found in a [GIST](https://gist.github.com/2667935)
+If you like to user composer just run.
+
+    curl -s http://getcomposer.org/installer | php
+    php composer.phar install
+
+The database isntructions can be found in the [repository](https://github.com/Aeronautics/Spitfire/blob/master/doc/spitfire.sql)
 while in development. Please, **be aware** that everything in this database 
 (while not in this repository) can be changed! The best option is to use 
 [MySQL Workbench](http://dev.mysql.com/downloads/workbench/) and use the 
