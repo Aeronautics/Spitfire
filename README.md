@@ -40,9 +40,9 @@ API
 
 Only GET.
 
-* /legislativo/partidos_[ .js, .xml, .json ]_
-* /legislativo/TSE/partidos/___{PARTIDO}____[ .js | .xml | .json ]_
-* /legislativo/TSE/partidos/___{PARTIDO}___/politicos_[ .js | .xml | .json ]_
+* /legislativo/partidos_[ .html, .xml, .json ]_
+* /legislativo/TSE/partidos/___{PARTIDO}____[ .html | .xml | .json ]_
+* /legislativo/TSE/partidos/___{PARTIDO}___/politicos_[ .html | .xml | .json ]_
 
 Estrutura sugerida
 ------------------
