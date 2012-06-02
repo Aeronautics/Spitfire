@@ -8,14 +8,16 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     exit(1);
 }
 
-$config = new Respect\Config\Container(APPLICATION_ROOT.'/conf/manifest.ini');
-
 /**
  * @return Respect\Config\Container
  */
 function config()
 {
-    global $config;
+    static $config;
+
+    if (null === $config) {
+        $config = new Respect\Config\Container(APPLICATION_ROOT.'/conf/manifest.ini');
+    }
 
     return $config->container;
 }
@@ -30,8 +32,8 @@ function normalize($string)
     $exeptions  = array('Do', 'De', 'Da', 'Dos', 'Das');
     foreach ($exeptions as $exeption) {
         $string = preg_replace(
-            "/\b{$exeption}\b/", 
-            strtolower($exeption), 
+            "/\b{$exeption}\b/",
+            strtolower($exeption),
             $string
         );
     }
@@ -41,8 +43,8 @@ function normalize($string)
 }
 
 /**
- * @param   string $message 
- * @param   resource $stream 
+ * @param   string $message
+ * @param   resource $stream
  * @return  void
  */
 function write($message, $stream = STDOUT)
@@ -54,8 +56,8 @@ function write($message, $stream = STDOUT)
 }
 
 /**
- * @param   string|array[optional] $message 
- * @param   resource $stream 
+ * @param   string|array[optional] $message
+ * @param   resource $stream
  * @return  void
  */
 function writeln($message = '', $stream = STDOUT)
@@ -79,8 +81,8 @@ function writeln_error($message = '')
 }
 
 /**
- * @param   string $question 
- * @param   bool[optional] $trim 
+ * @param   string $question
+ * @param   bool[optional] $trim
  * @return  string
  */
 function ask($question, $trim = true)
