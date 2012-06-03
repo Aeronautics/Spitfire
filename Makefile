@@ -1,3 +1,4 @@
+PORT		  = 8081
 CONFIG_TOOL   = php .foundation/repo/bin/project-config.php
 GENERATE_TOOL = php .foundation/repo/bin/project-generate.php
 
@@ -162,5 +163,19 @@ release: test package packagecommit pear pear-push tag
 	@git push --tags
 	@echo "Done. " `$(CONFIG_TOOL) package-name`-`$(CONFIG_TOOL) package-version` 
 
-database:
-	
+assets:
+	curl -L http://code.jquery.com/jquery-latest.js -o public/js/jquery.js
+	curl -LO http://twitter.github.com/bootstrap/assets/bootstrap.zip
+	@unzip -q -o bootstrap.zip
+	@echo " ./web/js/jquery.js"
+	@find bootstrap/ -type f									| \
+		awk '{print $2}' 										| \
+		grep -v '.min.' 										| \
+		cut -d '/' -f 3-4 										| \
+		xargs -n 1 -I {} mv -v "./bootstrap/{}" "./public/{}"	| \
+		cut -d '>' -f 2
+	@rm -rf bootstrap/*	
+	@rm -rf bootstrap.zip
+
+server: assets
+	php -S localhost:$(PORT) -t public public/.route.php
