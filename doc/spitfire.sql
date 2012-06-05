@@ -2,11 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+CREATE SCHEMA IF NOT EXISTS `hackathon_cmsp` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `hackathon_cmsp` ;
 
 -- -----------------------------------------------------
--- Table `politico`
+-- Table `hackathon_cmsp`.`politico`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `politico` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` DATETIME NOT NULL ,
   `nome` VARCHAR(45) NOT NULL ,
@@ -22,9 +24,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sessaoTipo`
+-- Table `hackathon_cmsp`.`sessaoTipo`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sessaoTipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`sessaoTipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(45) NOT NULL ,
   `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -33,9 +35,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `esfera`
+-- Table `hackathon_cmsp`.`esfera`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `esfera` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sigla` VARCHAR(10) NOT NULL ,
   `nome` VARCHAR(255) NOT NULL ,
@@ -48,9 +50,9 @@ COMMENT = 'É a esfera política onde';
 
 
 -- -----------------------------------------------------
--- Table `sessao`
+-- Table `hackathon_cmsp`.`sessao`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sessao` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`sessao` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `esfera_id` INT NOT NULL ,
   `sessaoTipo_id` INT NOT NULL ,
@@ -63,21 +65,21 @@ CREATE  TABLE IF NOT EXISTS `sessao` (
   INDEX `fk_sessao_esfera1` (`esfera_id` ASC) ,
   CONSTRAINT `fk_sessao_sessaotipo`
     FOREIGN KEY (`sessaoTipo_id` )
-    REFERENCES `sessaoTipo` (`id` )
+    REFERENCES `hackathon_cmsp`.`sessaoTipo` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_sessao_esfera1`
     FOREIGN KEY (`esfera_id` )
-    REFERENCES `esfera` (`id` )
+    REFERENCES `hackathon_cmsp`.`esfera` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `partido`
+-- Table `hackathon_cmsp`.`partido`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `partido` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`partido` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sigla` VARCHAR(5) NOT NULL ,
   `nome` VARCHAR(255) NULL COMMENT '	' ,
@@ -95,9 +97,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `politicoNome`
+-- Table `hackathon_cmsp`.`politicoNome`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `politicoNome` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politicoNome` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `politico_id` INT NOT NULL ,
   `nome` VARCHAR(255) NOT NULL ,
@@ -105,16 +107,16 @@ CREATE  TABLE IF NOT EXISTS `politicoNome` (
   PRIMARY KEY (`id`, `politico_id`) ,
   CONSTRAINT `fk_nome_parlamentar1`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mandato`
+-- Table `hackathon_cmsp`.`mandato`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mandato` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` DATETIME NOT NULL ,
   `inicio` DATE NOT NULL ,
@@ -124,9 +126,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `presenca`
+-- Table `hackathon_cmsp`.`presenca`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `presenca` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`presenca` (
   `id` INT NOT NULL ,
   `sessao_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -137,25 +139,25 @@ CREATE  TABLE IF NOT EXISTS `presenca` (
   INDEX `fk_presenca_parlamentar` (`politico_id` ASC) ,
   CONSTRAINT `fk_presenca_sessao`
     FOREIGN KEY (`sessao_id` )
-    REFERENCES `sessao` (`id` )
+    REFERENCES `hackathon_cmsp`.`sessao` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_presenca_parlamentar`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `votacao`
+-- Table `hackathon_cmsp`.`votacao`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `votacao` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`votacao` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sessao_id` INT NOT NULL ,
   `id_interno` TEXT NOT NULL ,
-  `matéria` TEXT NOT NULL ,
+  `materia` TEXT NOT NULL ,
   `data` DATE NOT NULL ,
   `nome` TEXT NOT NULL ,
   `tipo_votacao` VARCHAR(255) NULL ,
@@ -166,16 +168,16 @@ CREATE  TABLE IF NOT EXISTS `votacao` (
   INDEX `fk_votacao_sessao1` (`sessao_id` ASC) ,
   CONSTRAINT `fk_votacao_sessao1`
     FOREIGN KEY (`sessao_id` )
-    REFERENCES `sessao` (`id` )
+    REFERENCES `hackathon_cmsp`.`sessao` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `voto`
+-- Table `hackathon_cmsp`.`voto`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `voto` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`voto` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `votacao_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -186,21 +188,21 @@ CREATE  TABLE IF NOT EXISTS `voto` (
   INDEX `fk_voto_votacao1` (`votacao_id` ASC) ,
   CONSTRAINT `fk_voto_parlamentar`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_voto_votacao1`
     FOREIGN KEY (`votacao_id` )
-    REFERENCES `votacao` (`id` )
+    REFERENCES `hackathon_cmsp`.`votacao` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `meteriaTipo`
+-- Table `hackathon_cmsp`.`meteriaTipo`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `meteriaTipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`meteriaTipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `codigo` VARCHAR(45) NOT NULL ,
@@ -210,9 +212,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `materia`
+-- Table `hackathon_cmsp`.`materia`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `materia` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `id_interno` TEXT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -223,21 +225,21 @@ CREATE  TABLE IF NOT EXISTS `materia` (
   INDEX `fk_materia_meteriatipo` (`meteriaTipo_id` ASC) ,
   CONSTRAINT `fk_materia_parlamentar`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_materia_meteriatipo`
     FOREIGN KEY (`meteriaTipo_id` )
-    REFERENCES `meteriaTipo` (`id` )
+    REFERENCES `hackathon_cmsp`.`meteriaTipo` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `despesatipo`
+-- Table `hackathon_cmsp`.`despesatipo`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `despesatipo` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`despesatipo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `descricao` VARCHAR(45) NOT NULL ,
@@ -246,9 +248,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresa`
+-- Table `hackathon_cmsp`.`empresa`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `empresa` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`empresa` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `cnpj` INT NOT NULL ,
   `razao_social` VARCHAR(255) NOT NULL ,
@@ -259,9 +261,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `despesa`
+-- Table `hackathon_cmsp`.`despesa`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `despesa` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`despesa` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `criacao` TIMESTAMP NOT NULL ,
   `valor` FLOAT NOT NULL ,
@@ -274,26 +276,26 @@ CREATE  TABLE IF NOT EXISTS `despesa` (
   INDEX `fk_despesa_parlamentar1` (`parlamentar_id` ASC) ,
   CONSTRAINT `fk_despesa_despesatipo1`
     FOREIGN KEY (`despesatipo_id` )
-    REFERENCES `despesatipo` (`id` )
+    REFERENCES `hackathon_cmsp`.`despesatipo` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_despesa_empresa1`
     FOREIGN KEY (`empresa_id` )
-    REFERENCES `empresa` (`id` )
+    REFERENCES `hackathon_cmsp`.`empresa` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_despesa_parlamentar1`
     FOREIGN KEY (`parlamentar_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `materiaTag`
+-- Table `hackathon_cmsp`.`materiaTag`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `materiaTag` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materiaTag` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(45) NOT NULL ,
   `criacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -302,9 +304,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `materia_materiatag`
+-- Table `hackathon_cmsp`.`materia_materiatag`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `materia_materiatag` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`materia_materiatag` (
   `materia_id` INT NOT NULL ,
   `materiaTag_id` INT NOT NULL ,
   INDEX `fk_materia_materiatag_materiatag` (`materiaTag_id` ASC) ,
@@ -312,21 +314,21 @@ CREATE  TABLE IF NOT EXISTS `materia_materiatag` (
   PRIMARY KEY (`materia_id`, `materiaTag_id`) ,
   CONSTRAINT `fk_materia_materiatag_materia`
     FOREIGN KEY (`materia_id` )
-    REFERENCES `materia` (`id` )
+    REFERENCES `hackathon_cmsp`.`materia` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_materia_materiatag_materiatag`
     FOREIGN KEY (`materiaTag_id` )
-    REFERENCES `materiaTag` (`id` )
+    REFERENCES `hackathon_cmsp`.`materiaTag` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `esfera_mandato`
+-- Table `hackathon_cmsp`.`esfera_mandato`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `esfera_mandato` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`esfera_mandato` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `esfera_id` INT NOT NULL ,
   `mandato_id` INT NOT NULL ,
@@ -335,21 +337,21 @@ CREATE  TABLE IF NOT EXISTS `esfera_mandato` (
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_esfera_mandato_esfera1`
     FOREIGN KEY (`esfera_id` )
-    REFERENCES `esfera` (`id` )
+    REFERENCES `hackathon_cmsp`.`esfera` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_esfera_mandato_mandato1`
     FOREIGN KEY (`mandato_id` )
-    REFERENCES `mandato` (`id` )
+    REFERENCES `hackathon_cmsp`.`mandato` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mandato_politico`
+-- Table `hackathon_cmsp`.`mandato_politico`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mandato_politico` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`mandato_politico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `mandato_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -358,21 +360,21 @@ CREATE  TABLE IF NOT EXISTS `mandato_politico` (
   INDEX `fk_mandato_parlamentar_mandato1` (`mandato_id` ASC) ,
   CONSTRAINT `fk_mandato_parlamentar_mandato1`
     FOREIGN KEY (`mandato_id` )
-    REFERENCES `mandato` (`id` )
+    REFERENCES `hackathon_cmsp`.`mandato` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_mandato_parlamentar_parlamentar1`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `partido_presidente`
+-- Table `hackathon_cmsp`.`partido_presidente`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `partido_presidente` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`partido_presidente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `partido_id` INT NOT NULL ,
   `politico_id` INT NOT NULL ,
@@ -382,21 +384,21 @@ CREATE  TABLE IF NOT EXISTS `partido_presidente` (
   INDEX `fk_politico_partido_politico1` (`politico_id` ASC) ,
   CONSTRAINT `fk_politico_partido_politico1`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_politico_partido_partido1`
     FOREIGN KEY (`partido_id` )
-    REFERENCES `partido` (`id` )
+    REFERENCES `hackathon_cmsp`.`partido` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `politico_partido`
+-- Table `hackathon_cmsp`.`politico_partido`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `politico_partido` (
+CREATE  TABLE IF NOT EXISTS `hackathon_cmsp`.`politico_partido` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `politico_id` INT NOT NULL ,
   `partido_id` INT NOT NULL ,
@@ -406,12 +408,12 @@ CREATE  TABLE IF NOT EXISTS `politico_partido` (
   INDEX `fk_politico_partido_politico2` (`politico_id` ASC) ,
   CONSTRAINT `fk_politico_partido_politico2`
     FOREIGN KEY (`politico_id` )
-    REFERENCES `politico` (`id` )
+    REFERENCES `hackathon_cmsp`.`politico` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_politico_partido_partido2`
     FOREIGN KEY (`partido_id` )
-    REFERENCES `partido` (`id` )
+    REFERENCES `hackathon_cmsp`.`partido` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
